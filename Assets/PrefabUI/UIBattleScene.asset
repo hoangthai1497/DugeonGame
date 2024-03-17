@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09386e90dbdb5ec4b96ee8fab256b482, type: 3}
+  m_Name: UIBattleScene
+  m_EditorClassIdentifier: 
+  templateUIPrefab: {fileID: 8224199110131325440, guid: 817522fa4db051b45b88d99f0fb183b0, type: 3}
+  screensToRegister:
+  - {fileID: 3746977916065622720, guid: dc176b185ae69c741ba3eb4c040d2687, type: 3}
+  deactivateScreenGOs: 1
