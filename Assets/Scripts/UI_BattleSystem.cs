@@ -5,50 +5,54 @@ using deVoid.UIFramework;
 using deVoid.Utils;
 using UnityEngine.UI;
 using System;
-using static Dugeon.Signal.SignalDefine;
+using Dugeon.Signal;
 
-[Serializable]
-public class UI_BattleSystemProperties : PanelProperties
+namespace Dugeon
 {
-    public Unit Enemy;
-    public Unit Player;
-    public BattleSystem BattleSystem;
-}
 
-public class UI_BattleSystem : APanelController<UI_BattleSystemProperties>
-{
-    [SerializeField] private Button _attackBtn;
-    [SerializeField] private Button _healkBtn;
-    [SerializeField] private Slider _playerHealth;
-    [SerializeField] private Slider _enemyHealth;
-    
-    protected override void OnPropertiesSet()
+    [Serializable]
+    public class UI_BattleSystemProperties : PanelProperties
     {
-        base.OnPropertiesSet();
-
+        public Unit Enemy;
+        public Unit Player;
+        public BattleSystem BattleSystem;
     }
 
-    protected override void AddListeners()
+    public class UI_BattleSystem : APanelController<UI_BattleSystemProperties>
     {
-        base.AddListeners();
-        
-        _attackBtn?.onClick.AddListener(() => { Properties.BattleSystem.AttackFunc(); });
-        Signals.Get<HandleHealthyBar>().AddListener(OnClickActtackBtn);
+        [SerializeField] private Button _attackBtn;
+        [SerializeField] private Button _healkBtn;
+        [SerializeField] private Slider _playerHealth;
+        [SerializeField] private Slider _enemyHealth;
+
+        protected override void OnPropertiesSet()
+        {
+            base.OnPropertiesSet();
+
+        }
+
+        protected override void AddListeners()
+        {
+            base.AddListeners();
+
+            _attackBtn?.onClick.AddListener(() => { Properties.BattleSystem.AttackFunc(); });
+            Signals.Get<HandleHealthyBar>().AddListener(OnClickActtackBtn);
+
+        }
+        private void OnClickActtackBtn()
+        {
+            _enemyHealth.value = (float)Properties.Enemy.CurrentHP / Properties.Enemy.HealtPointMax;
+
+            _playerHealth.value = (float)Properties.Player.CurrentHP / Properties.Player.HealtPointMax;
+
+        }
+        protected override void RemoveListeners()
+        {
+            base.RemoveListeners();
+            Signals.Get<HandleHealthyBar>().RemoveListener(OnClickActtackBtn);
+
+        }
+
 
     }
-    private void OnClickActtackBtn()
-    {
-        _enemyHealth.value = (float)Properties.Enemy.CurrentHP / Properties.Enemy.HealtPointMax;
-
-        _playerHealth.value = (float)Properties.Player.CurrentHP / Properties.Player.HealtPointMax;
-
-    }
-    protected override void RemoveListeners()
-    {
-        base.RemoveListeners();
-        Signals.Get<HandleHealthyBar>().RemoveListener(OnClickActtackBtn);
-
-    }
-
-
 }

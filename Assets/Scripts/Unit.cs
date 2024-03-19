@@ -2,7 +2,6 @@ using deVoid.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Dugeon.Signal.SignalDefine;
 
 public class Unit : MonoBehaviour
 {
@@ -53,4 +52,5 @@ public class Unit : MonoBehaviour
     {
         return AnimatorIsPlaying("attack") && _animator.GetCurrentAnimatorStateInfo(0).IsName(stateName);
     }
+
 }
